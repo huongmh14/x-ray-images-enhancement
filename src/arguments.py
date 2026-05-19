@@ -13,8 +13,20 @@ class ArgumentHandler:
 		group.add_argument("-i", metavar="img", type=str, help="image to be processed")
 		group.add_argument("-p", metavar="path", type=str, help="path to the images to be processed")
 
-		self.__parser.add_argument("-a", metavar="alg", type=str, help="algorithm to be used", required=True, choices=["clahe", "um", "hef"])
+		self.__parser.add_argument(
+			"-a",
+			metavar="alg",
+			type=str,
+			help="algorithm pipeline to be used",
+			required=False,
+			default="medical",
+			choices=["medical"],
+		)
 		self.__parser.add_argument("-o", metavar="path", type=str, help="path to export the results", required=False)
+		self.__parser.add_argument("--log-gain", type=float, help="log transform gain c", required=False)
+		self.__parser.add_argument("--clip-limit", type=float, help="CLAHE clip limit", required=False)
+		self.__parser.add_argument("--tile-grid-size", type=int, help="CLAHE tile grid size", required=False)
+		self.__parser.add_argument("--unsharp-amount", type=float, help="unsharp mask amount", required=False)
 
 	def get_image(self):
 		'''Gets the image from argument -i.'''
@@ -38,3 +50,13 @@ class ArgumentHandler:
 
 		if self.__parsed_args['o']:
 			return self.__parsed_args['o']
+
+	def get_parameter_overrides(self):
+		'''Gets optional algorithm parameter overrides.'''
+
+		return {
+			"log_gain": self.__parsed_args["log_gain"],
+			"clip_limit": self.__parsed_args["clip_limit"],
+			"tile_grid_size": self.__parsed_args["tile_grid_size"],
+			"sharpen_amount": self.__parsed_args["unsharp_amount"],
+		}
