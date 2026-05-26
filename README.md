@@ -160,7 +160,7 @@ python app.py -p images -o results/full_batch --log-gain 3 --clip-limit 1 --tile
 Khoi dong web app:
 
 ```bash
-streamlit run streamlit_app.py
+ python streamlit run streamlit_app.py
 ```
 
 Sau do mo dia chi local trong terminal, thuong la:

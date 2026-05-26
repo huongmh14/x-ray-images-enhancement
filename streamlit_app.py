@@ -71,16 +71,16 @@ with col1:
 	st.subheader("Original")
 	st.image(result["original"], clamp=True, use_container_width=True)
 with col2:
-	st.subheader("Enhanced")
-	st.image(result["enhanced"], clamp=True, use_container_width=True)
+	st.subheader("Log Transform")
+	st.image(result["log"], clamp=True, use_container_width=True)
 
 col3, col4 = st.columns(2)
 with col3:
-	st.subheader("Log Transform")
-	st.image(result["log"], clamp=True, use_container_width=True)
-with col4:
 	st.subheader("CLAHE")
 	st.image(result["clahe"], clamp=True, use_container_width=True)
+with col4:
+	st.subheader("Enhanced")
+	st.image(result["enhanced"], clamp=True, use_container_width=True)
 
 st.metric("Runtime", f"{result['runtime']:.4f}s")
 
